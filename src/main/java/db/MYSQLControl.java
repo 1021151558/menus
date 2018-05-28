@@ -17,7 +17,7 @@ import java.util.List;
  */
     public class MYSQLControl {
     //根据自己的数据库地址修改
-    static DataSource ds = MyDataSourse.getDataSource("jdbc:mysql://127.0.0.1:3306/fooddata");
+    static DataSource ds = MyDataSourse.getDataSource("jdbc:mysql://127.0.0.1:3306/healthy");
     static QueryRunner qr = new QueryRunner(ds);
     //第一类方法
     public static void executeUpdate(String sql){
@@ -28,22 +28,32 @@ import java.util.List;
         }
     }
     //第二类数据库操作方法
-    public static void executeInsert(List<Food> data) throws SQLException {
+
+
+    //allfood
+    public static void executeInsertAllFood(List<Food> data,String foodTable) throws SQLException {
         /*
          * 定义一个Object数组，行列
          * 3表示列数，根据自己的数据定义这里面的数字
          * params[i][0]等是对数组赋值，这里用到集合的get方法
          *
          */
-        Object[][] params = new Object[data.size()][3];
+        Object[][] params = new Object[data.size()][6];
         for ( int i=0; i<params.length; i++ ){
             params[i][0] = data.get(i).getFoodName();
             params[i][1] = data.get(i).getFoodPopularity();
             params[i][2] = data.get(i).getFoodWork();
+            params[i][3] = data.get(i).getFoodIcon();
+            params[i][4] = data.get(i).getFoodMethod();
+            params[i][5] = foodTable;
         }
-        qr.batch("insert into menu (food_name, food_popularity, food_work)"
-                + "values (?,?,?)", params);
+        //westMenu,menu
+
+        qr.batch("insert into foods (food_name, food_popularity, food_work,food_icon,food_method,food_table)"
+                + "values (?,?,?,?,?,?)", params);
         System.out.println("执行数据库完毕！"+"成功插入数据："+data.size()+"条");
 
     }
+
+
 }

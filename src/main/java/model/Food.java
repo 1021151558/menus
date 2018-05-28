@@ -10,6 +10,16 @@ public class Food {
     private  String foodName;
     private  String foodWork;
     private  String foodPopularity;
+    private  String foodIcon;
+    private  String foodMethod;
+
+    public String getFoodMethod() {
+        return foodMethod;
+    }
+
+    public void setFoodMethod(String foodMethod) {
+        this.foodMethod = foodMethod;
+    }
 
     public String getFoodName() {
         return foodName;
@@ -33,5 +43,13 @@ public class Food {
 
     public void setFoodPopularity(String foodPopularity) {
         this.foodPopularity = foodPopularity;
+    }
+
+    public String getFoodIcon() {
+        return foodIcon;
+    }
+
+    public void setFoodIcon(String foodIcon) {
+        this.foodIcon = foodIcon;
     }
 }
